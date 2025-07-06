@@ -10,16 +10,16 @@ export default function WaitlistPage() {
     >
       {/* Floating Navbar */}
       <nav
-        className="mx-8 mt-8 rounded-full px-8 py-4 shadow-lg"
+        className="mx-4 sm:mx-8 mt-4 sm:mt-8 rounded-full px-4 sm:px-8 py-3 sm:py-4 shadow-lg"
         style={{ backgroundColor: "hsla(15, 29%, 95%, 1)" }}
       >
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded bg-orange-500">
-              <span className="text-sm font-bold text-white">R</span>
+            <div className="flex h-7 sm:h-8 w-7 sm:w-8 items-center justify-center rounded bg-orange-500">
+              <span className="text-xs sm:text-sm font-bold text-white">R</span>
             </div>
-            <span className="text-lg font-semibold text-gray-800">
+            <span className="text-base sm:text-lg font-semibold text-gray-800">
               residence
             </span>
           </Link>
@@ -28,57 +28,57 @@ export default function WaitlistPage() {
           <div className="hidden md:flex items-center space-x-8">
             <a
               href="#"
-              className="text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
             >
               How It Works
             </a>
             <a
               href="#"
-              className="text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
             >
               List a Property
             </a>
             <a
               href="#"
-              className="text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
             >
               Find a Home
             </a>
             <a
               href="#"
-              className="text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
             >
               FAQs
             </a>
             <a
               href="#"
-              className="text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
             >
               Contact Us
             </a>
           </div>
 
           {/* Get Started Button */}
-          <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full">
+          <Button className="bg-orange-500 hover:bg-orange-600 text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base">
             Get started
           </Button>
         </div>
       </nav>
 
       {/* Waitlist Form Section */}
-      <div className="max-w-4xl mx-auto px-8 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="text-center mb-8 lg:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 lg:mb-6 leading-tight">
             Be the First to Experience{" "}
             <span className="text-teal-600">Smarter</span> Renting
           </h1>
-          <p className="text-gray-600 text-lg leading-relaxed max-w-xl mx-auto">
+          <p className="text-gray-600 text-base lg:text-lg leading-relaxed max-w-xl mx-auto">
             Whether you're a tenant looking for a stress-free home, or a
             landlord ready to manage rentals more transparently. Residence is
             almost here. Get notified when we launch.
           </p>
         </div>
-        <div className="px-32">
+        <div className="px-0 sm:px-8 md:px-16 lg:px-32">
           <WaitlistForm />
         </div>
       </div>

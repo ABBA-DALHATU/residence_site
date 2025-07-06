@@ -99,7 +99,7 @@ export function WaitlistForm() {
               <FormControl>
                 <Input
                   placeholder="Enter your full name"
-                  className="w-full px-6 py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-lg h-auto"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
                   {...field}
                 />
               </FormControl>
@@ -121,7 +121,7 @@ export function WaitlistForm() {
                 <Input
                   placeholder="We'll use this to contact you"
                   type="email"
-                  className="w-full px-6 py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-lg h-auto"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
                   {...field}
                 />
               </FormControl>
@@ -143,7 +143,7 @@ export function WaitlistForm() {
                 <Input
                   placeholder="Preferably WhatsApp-enabled"
                   type="tel"
-                  className="w-full px-6 py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-lg h-auto"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
                   {...field}
                 />
               </FormControl>
@@ -164,7 +164,7 @@ export function WaitlistForm() {
               <FormControl>
                 <Input
                   placeholder="Where are you located?"
-                  className="w-full px-6 py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-lg h-auto"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
                   {...field}
                 />
               </FormControl>
@@ -230,7 +230,7 @@ export function WaitlistForm() {
               <FormControl>
                 <Textarea
                   placeholder="Type your message..."
-                  className="w-full px-6 py-4 rounded-3xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-lg resize-none min-h-[120px]"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-3xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg resize-none min-h-[120px]"
                   {...field}
                 />
               </FormControl>
@@ -273,7 +273,7 @@ export function WaitlistForm() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full text-lg font-medium h-auto disabled:opacity-50 disabled:cursor-not-allowed transition-opacity duration-200"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium h-auto disabled:opacity-50 disabled:cursor-not-allowed transition-opacity duration-200"
           >
             {isSubmitting ? (
               <div className="flex items-center justify-center">
