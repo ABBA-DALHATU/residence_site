@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "sonner";
+import Container from "@/components/global/container";
+import Navbar from "@/components/navbar/navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -12,6 +14,11 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+const euclid = localFont({
+  src: "./fonts/Euclid Circular B Regular.ttf",
+  variable: "--font-euclid",
+  weight: "500"
 });
 
 export const metadata: Metadata = {
@@ -89,9 +96,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${euclid.variable} ${geistMono.variable} font-euclid antialiased`}
       >
-        {children}
+        <Navbar />
+          {/* Main content area */}
+          {children}
       </body>
       <Toaster />
     </html>
