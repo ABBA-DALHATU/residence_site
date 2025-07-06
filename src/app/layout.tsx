@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     email: true,
   },
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  themeColor: "#16A34A",
+  themeColor: "#F5EFED",
   manifest: "/manifest.json",
   icons: {
     icon: [{ url: "/favicon.ico" }, { url: "/icon.png", type: "image/png" }],
