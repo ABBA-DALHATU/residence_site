@@ -101,7 +101,7 @@ export default function ResidenceLanding() {
               className="grid md:grid-cols-2 gap-8 mb-20"
             >
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                <h2 className="text-4xl md:text-5xl  text-gray-900 leading-tight">
                   Popular Cities Across Nigeria
                 </h2>
               </div>
@@ -134,7 +134,7 @@ export default function ResidenceLanding() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">FCT, Abuja</h3>
+                  <h3 className="text-2xl mb-2">FCT, Abuja</h3>
                   <p className="text-white/90">2,500+ Properties</p>
                 </div>
               </motion.div>
@@ -153,7 +153,7 @@ export default function ResidenceLanding() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">Lagos</h3>
+                  <h3 className="text-2xl  mb-2">Lagos</h3>
                   <p className="text-white/90">3,800+ Properties</p>
                 </div>
               </motion.div>
@@ -172,7 +172,7 @@ export default function ResidenceLanding() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">Port Harcourt</h3>
+                  <h3 className="text-2xl mb-2">Port Harcourt</h3>
                   <p className="text-white/90">1,500+ Properties</p>
                 </div>
               </motion.div>
@@ -191,7 +191,7 @@ export default function ResidenceLanding() {
               transition={{ duration: 0.5 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl md:text-5xl  text-gray-900 mb-4">
                 How It Works
               </h2>
               <div></div>
@@ -266,7 +266,7 @@ export default function ResidenceLanding() {
             <Home className="h-5 w-5 text-orange-600" />
           </motion.div>
           <div>
-            <h4 className="text-xl font-bold text-gray-900 mb-2">
+            <h4 className="text-xl  text-gray-900 mb-2">
               List Properties
             </h4>
             <p className="text-gray-600 leading-relaxed">
@@ -291,7 +291,7 @@ export default function ResidenceLanding() {
             <FileText className="h-5 w-5 text-teal-600" />
           </motion.div>
           <div>
-            <h4 className="text-xl font-bold text-gray-900 mb-2">
+            <h4 className="text-xl  text-gray-900 mb-2">
               Manage Properties
             </h4>
             <p className="text-gray-600 leading-relaxed">
@@ -316,7 +316,7 @@ export default function ResidenceLanding() {
             <CreditCard className="h-5 w-5 text-orange-600" />
           </motion.div>
           <div>
-            <h4 className="text-xl font-bold text-gray-900 mb-2">
+            <h4 className="text-xl  text-gray-900 mb-2">
               Collect Payments
             </h4>
             <p className="text-gray-600 leading-relaxed">
@@ -379,7 +379,7 @@ export default function ResidenceLanding() {
             <Search className="h-5 w-5 text-orange-600" />
           </motion.div>
           <div>
-            <h4 className="text-xl font-bold text-gray-900 mb-2">
+            <h4 className="text-xl  text-gray-900 mb-2">
               Search Properties
             </h4>
             <p className="text-gray-600 leading-relaxed">
@@ -404,7 +404,7 @@ export default function ResidenceLanding() {
             <Eye className="h-5 w-5 text-teal-600" />
           </motion.div>
           <div>
-            <h4 className="text-xl font-bold text-gray-900 mb-2">
+            <h4 className="text-xl  text-gray-900 mb-2">
               View Details
             </h4>
             <p className="text-gray-600 leading-relaxed">
@@ -429,7 +429,7 @@ export default function ResidenceLanding() {
             <Shield className="h-5 w-5 text-orange-600" />
           </motion.div>
           <div>
-            <h4 className="text-xl font-bold text-gray-900 mb-2">
+            <h4 className="text-xl  text-gray-900 mb-2">
               Book Securely
             </h4>
             <p className="text-gray-600 leading-relaxed">
@@ -510,7 +510,7 @@ export default function ResidenceLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+              <h2 className="text-3xl md:text-4xl  text-gray-900 mb-8">
                 Ready to rent or manage your next home? Residence makes it easy.
               </h2>
               {/* <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">

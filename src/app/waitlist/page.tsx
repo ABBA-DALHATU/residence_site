@@ -1,3 +1,4 @@
+import Logo from "@/components/global/logo";
 import { Button } from "@/components/ui/button";
 import { WaitlistForm } from "@/components/waitlist-form";
 import Link from "next/link";
@@ -12,7 +13,7 @@ export default function WaitlistPage() {
       {/* Waitlist Form Section */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="text-center mb-8 lg:mb-12">
-          <h1 className="text-3xl mt-40  sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 lg:mb-6 leading-tight">
+          <h1 className="text-3xl mt-40  sm:text-4xl md:text-5xl  text-gray-900 mb-4 lg:mb-6 leading-tight">
             Be the First to Experience{" "}
             <span className="text-[#0f7173]">Smarter</span> Renting
           </h1>
@@ -34,12 +35,10 @@ export default function WaitlistPage() {
             {/* Logo */}
             <div className="md:col-span-1">
               <div className="flex items-center space-x-2 mb-6">
-                <div className="flex h-8 w-8 items-center justify-center rounded bg-orange-500">
-                  <span className="text-sm font-bold text-white">R</span>
-                </div>
-                <span className="text-xl font-semibold text-white">
-                  residence
-                </span>
+                <Logo
+                width={200}
+                height={200}
+                />
               </div>
             </div>
 
@@ -81,7 +80,7 @@ export default function WaitlistPage() {
 
             {/* Contact */}
             <div className="md:col-span-2">
-              <h3 className="text-xl font-bold text-white mb-6">Contact</h3>
+              <h3 className="text-xl  text-white mb-6">Contact</h3>
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-2 h-2 bg-white rounded-full"></div>

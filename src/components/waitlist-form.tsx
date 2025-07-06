@@ -224,16 +224,16 @@ export function WaitlistForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-base font-medium text-gray-700 mb-2">
+              {/* <FormLabel className="text-base font-medium text-gray-700 mb-2">
                 Tell us briefly why you want to partner with us:
-              </FormLabel>
-              <FormControl>
+              </FormLabel> */}
+              {/* <FormControl>
                 <Textarea
                   placeholder="Type your message..."
                   className="min-w-full w-full px-4 sm:px-6 py-3 sm:py-4 rounded-3xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg resize-none min-h-[120px]"
                   {...field}
                 />
-              </FormControl>
+              </FormControl> */}
               <FormMessage />
             </FormItem>
           )}
@@ -273,7 +273,7 @@ export function WaitlistForm() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium h-auto disabled:opacity-50 disabled:cursor-not-allowed transition-opacity duration-200"
+            className="w-full text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium h-auto disabled:opacity-50 disabled:cursor-not-allowed transition-opacity duration-200"
           >
             {isSubmitting ? (
               <div className="flex items-center justify-center">
