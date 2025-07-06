@@ -18,7 +18,7 @@ const geistMono = localFont({
 const euclid = localFont({
   src: "./fonts/Euclid Circular B Regular.ttf",
   variable: "--font-euclid",
-  weight: "500"
+  weight: "500",
 });
 
 export const metadata: Metadata = {
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     email: true,
   },
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  themeColor: "#F5EFED",
+  themeColor: "#FFFFFF",
   manifest: "/manifest.json",
   icons: {
     icon: [{ url: "/favicon.ico" }, { url: "/icon.png", type: "image/png" }],
@@ -99,8 +99,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${euclid.variable} ${geistMono.variable} font-euclid antialiased`}
       >
         <Navbar />
-          {/* Main content area */}
-          {children}
+        {/* Main content area */}
+        {children}
       </body>
       <Toaster />
     </html>
