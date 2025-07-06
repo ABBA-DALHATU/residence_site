@@ -7,70 +7,14 @@ export default function WaitlistPage() {
     <div
       className="min-h-screen"
       style={{ backgroundColor: "hsla(38, 67%, 98%, 1)" }}
-    >
-      {/* Floating Navbar */}
-      <nav
-        className="mx-4 sm:mx-8 mt-4 sm:mt-8 rounded-full px-4 sm:px-8 py-3 sm:py-4 shadow-lg"
-        style={{ backgroundColor: "hsla(15, 29%, 95%, 1)" }}
-      >
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="flex h-7 sm:h-8 w-7 sm:w-8 items-center justify-center rounded bg-orange-500">
-              <span className="text-xs sm:text-sm font-bold text-white">R</span>
-            </div>
-            <span className="text-base sm:text-lg font-semibold text-gray-800">
-              residence
-            </span>
-          </Link>
-
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a
-              href="#"
-              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              How It Works
-            </a>
-            <a
-              href="#"
-              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              List a Property
-            </a>
-            <a
-              href="#"
-              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              Find a Home
-            </a>
-            <a
-              href="#"
-              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              FAQs
-            </a>
-            <a
-              href="#"
-              className="text-sm lg:text-base text-gray-700 hover:text-gray-900 transition-colors"
-            >
-              Contact Us
-            </a>
-          </div>
-
-          {/* Get Started Button */}
-          <Button className="bg-orange-500 hover:bg-orange-600 text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base">
-            Get started
-          </Button>
-        </div>
-      </nav>
+    >    
 
       {/* Waitlist Form Section */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="text-center mb-8 lg:mb-12">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 lg:mb-6 leading-tight">
+          <h1 className="text-3xl mt-40  sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 lg:mb-6 leading-tight">
             Be the First to Experience{" "}
-            <span className="text-teal-600">Smarter</span> Renting
+            <span className="text-[#0f7173]">Smarter</span> Renting
           </h1>
           <p className="text-gray-600 text-base lg:text-lg leading-relaxed max-w-xl mx-auto">
             Whether you're a tenant looking for a stress-free home, or a
@@ -84,7 +28,7 @@ export default function WaitlistPage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-teal-700 text-white py-16 px-8">
+      <footer className="bg-[#0f7173] text-white py-16 px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             {/* Logo */}
