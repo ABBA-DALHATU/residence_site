@@ -91,7 +91,7 @@ export default function ResidenceLanding() {
 
         {/* Popular Cities Section */}
         <div style={{ backgroundColor: "hsla(38, 67%, 98%, 1)" }}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-32">
+          <div className="max-w-7xl mx-auto lg:px-12 py-32">
             {/* Section Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}

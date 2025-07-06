@@ -36,9 +36,6 @@ const formSchema = z.object({
   role: z.enum(["TENANT", "LANDLORD"], {
     required_error: "Please select a role.",
   }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
   terms: z.boolean().refine((value) => value === true, {
     message: "You must accept the terms and conditions.",
   }),
@@ -56,7 +53,6 @@ export function WaitlistForm() {
       email: "",
       phone: "",
       city: "",
-      message: "",
       terms: false,
     },
   });
@@ -213,27 +209,6 @@ export function WaitlistForm() {
                   </div>
                 </RadioGroup>
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Message */}
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              {/* <FormLabel className="text-base font-medium text-gray-700 mb-2">
-                Tell us briefly why you want to partner with us:
-              </FormLabel> */}
-              {/* <FormControl>
-                <Textarea
-                  placeholder="Type your message..."
-                  className="min-w-full w-full px-4 sm:px-6 py-3 sm:py-4 rounded-3xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg resize-none min-h-[120px]"
-                  {...field}
-                />
-              </FormControl> */}
               <FormMessage />
             </FormItem>
           )}
