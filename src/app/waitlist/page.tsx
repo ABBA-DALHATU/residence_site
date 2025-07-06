@@ -78,7 +78,7 @@ export default function WaitlistPage() {
             almost here. Get notified when we launch.
           </p>
         </div>
-        <div className="px-0 sm:px-8 md:px-16 lg:px-32">
+        <div className="px-0 sm:px-4 md:px-8 lg:px-32">
           <WaitlistForm />
         </div>
       </div>

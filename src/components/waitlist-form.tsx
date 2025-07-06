@@ -99,7 +99,7 @@ export function WaitlistForm() {
               <FormControl>
                 <Input
                   placeholder="Enter your full name"
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
+                  className="min-w-full w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
                   {...field}
                 />
               </FormControl>
@@ -121,7 +121,7 @@ export function WaitlistForm() {
                 <Input
                   placeholder="We'll use this to contact you"
                   type="email"
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
+                  className="min-w-full w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
                   {...field}
                 />
               </FormControl>
@@ -143,7 +143,7 @@ export function WaitlistForm() {
                 <Input
                   placeholder="Preferably WhatsApp-enabled"
                   type="tel"
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
+                  className="min-w-full w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
                   {...field}
                 />
               </FormControl>
@@ -164,7 +164,7 @@ export function WaitlistForm() {
               <FormControl>
                 <Input
                   placeholder="Where are you located?"
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
+                  className="min-w-full w-full px-4 sm:px-6 py-3 sm:py-4 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg h-auto"
                   {...field}
                 />
               </FormControl>
@@ -230,7 +230,7 @@ export function WaitlistForm() {
               <FormControl>
                 <Textarea
                   placeholder="Type your message..."
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-3xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg resize-none min-h-[120px]"
+                  className="min-w-full w-full px-4 sm:px-6 py-3 sm:py-4 rounded-3xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg resize-none min-h-[120px]"
                   {...field}
                 />
               </FormControl>
