@@ -295,7 +295,7 @@ export default function ResidenceLanding() {
               Manage Properties
             </h4>
             <p className="text-gray-600 leading-relaxed">
-              Say goodbye to spreadsheets and endless calls. Handle check-ins from your all-in-one dashboard.
+              Say goodbye to spreadsheets and long phone calls. With our easy-to-use dashboard, you can manage all your check-ins in one place, quickly and stress-free.
             </p>
           </div>
         </div>
@@ -383,7 +383,7 @@ export default function ResidenceLanding() {
               Search Properties
             </h4>
             <p className="text-gray-600 leading-relaxed">
-              Find your ideal home from our extensive listings
+              Discover homes near you from our extensive listings — tailored to your location, preferences, and lifestyle.
             </p>
           </div>
         </div>
@@ -408,7 +408,7 @@ export default function ResidenceLanding() {
               View Details
             </h4>
             <p className="text-gray-600 leading-relaxed">
-              Get everything you need to know, upfront. See real photos, amenities, and verified reviews.
+             Get everything you need to know, upfront. Explore 3D virtual tours, view real photos, check amenities, and read verified reviews  all before you book.
             </p>
           </div>
         </div>
@@ -433,7 +433,7 @@ export default function ResidenceLanding() {
               Book Securely
             </h4>
             <p className="text-gray-600 leading-relaxed">
-              Pay through our secure platform, track your booking, and get instant confirmation.
+              Pay securely through our platform, track your booking in real-time, get instant confirmation, and enjoy a safe inspection process with our verified agents.
             </p>
           </div>
         </div>
