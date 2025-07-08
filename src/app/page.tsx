@@ -102,7 +102,7 @@ export default function ResidenceLanding() {
             >
               <div>
                 <h2 className="text-4xl md:text-5xl  text-gray-900 leading-tight">
-                  Popular Cities Across Nigeria.
+                  Popular Cities Across Nigeria
                 </h2>
               </div>
               <div className="flex items-center">
