@@ -36,9 +36,7 @@ const formSchema = z.object({
   role: z.enum(["TENANT", "LANDLORD"], {
     required_error: "Please select a role.",
   }),
-  terms: z.boolean().refine((value) => value === true, {
-    message: "You must accept the terms and conditions.",
-  }),
+  buildWithUs: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -53,15 +51,14 @@ export function WaitlistForm() {
       email: "",
       phone: "",
       city: "",
-      terms: false,
+      buildWithUs: "",
     },
   });
 
   async function onSubmit(data: FormValues) {
     try {
       setIsSubmitting(true);
-      const { terms, ...submitData } = data;
-      const result = await addToWaitlist(submitData);
+      const result = await addToWaitlist(data);
 
       if (result.error) {
         toast.error(result.error);
@@ -214,30 +211,22 @@ export function WaitlistForm() {
           )}
         />
 
-        {/* Terms */}
+        {/* Build With Us */}
         <FormField
           control={form.control}
-          name="terms"
+          name="buildWithUs"
           render={({ field }) => (
-            <FormItem className="flex items-start space-x-3">
+            <FormItem>
+              <FormLabel className="text-base font-medium text-gray-700 mb-2">
+                Build with us
+              </FormLabel>
               <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  className="w-5 h-5 mt-0.5 text-teal-600 border-gray-300 rounded focus:ring-teal-500"
+                <Textarea
+                  placeholder="Tell us what you would like to have on your management dashboard or any features you'd want to see"
+                  className="min-w-full w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 placeholder-gray-500 text-base sm:text-lg min-h-[100px] resize-vertical"
+                  {...field}
                 />
               </FormControl>
-              <div className="space-y-1">
-                <FormLabel className="text-base text-gray-700">
-                  I accept the{" "}
-                  <a
-                    href="#"
-                    className="text-teal-600 hover:text-teal-700 underline"
-                  >
-                    Terms
-                  </a>
-                </FormLabel>
-              </div>
               <FormMessage />
             </FormItem>
           )}
