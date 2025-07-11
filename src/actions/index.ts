@@ -27,6 +27,14 @@ export async function addToWaitlist(data: any) {
             "This email is already registered in our waitlist. Please use a different email address.",
         };
       }
+      // Database connection errors
+      if (error.code === "P1001" || error.code === "P1017") {
+        console.error("Database connection error:", error);
+        return {
+          error:
+            "We're having trouble connecting to our database. Please try again in a few minutes.",
+        };
+      }
     }
 
     return { error: "Failed to add to waitlist. Please try again later." };
