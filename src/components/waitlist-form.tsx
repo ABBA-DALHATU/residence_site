@@ -36,7 +36,7 @@ const formSchema = z.object({
   role: z.enum(["TENANT", "LANDLORD"], {
     required_error: "Please select a role.",
   }),
-  buildWithUs: z.string().optional(),
+  message: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -51,7 +51,7 @@ export function WaitlistForm() {
       email: "",
       phone: "",
       city: "",
-      buildWithUs: "",
+      message: "",
     },
   });
 
@@ -69,9 +69,9 @@ export function WaitlistForm() {
         "Successfully joined the waitlist! We'll be in touch soon."
       );
       form.reset();
-    } catch (error) {
-      toast.error("Something went wrong. Please try again.");
-      console.error(error);
+    } catch (error: any) {
+      console.error("Form submission error:", error);
+      toast.error(error?.message || "Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -214,7 +214,7 @@ export function WaitlistForm() {
         {/* Build With Us */}
         <FormField
           control={form.control}
-          name="buildWithUs"
+          name="message"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-base font-medium text-gray-700 mb-2">
