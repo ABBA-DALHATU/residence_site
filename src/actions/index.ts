@@ -1,25 +1,10 @@
 "use server";
 
 import { prisma } from "@/lib/prismaClient";
-// import { Prisma } from "@/generated/prisma";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 export async function addToWaitlist(data: any) {
   try {
-    console.log(
-      "Attempting to connect to database and create waitlist entry..."
-    );
-
-    // Test database connection first
-    try {
-      await prisma.$connect();
-      console.log("Database connection successful");
-    } catch (connError) {
-      console.error("Database connection failed:", connError);
-      return {
-        error: "Unable to connect to database. Please try again later.",
-      };
-    }
-
     const waitlist = await prisma.waitlist.create({
       data: {
         email: data.email,
@@ -32,23 +17,19 @@ export async function addToWaitlist(data: any) {
     });
     return { success: "Added to waitlist", waitlist };
   } catch (error) {
-    console.error("Detailed error:", error);
+    console.error("Unexpected error:", error);
 
-    // Check if error is a Prisma error object
-    if (error instanceof Object && "code" in error) {
-      if (error.code === "P2002") {
-        return {
-          error:
-            "This email is already registered in our waitlist. Please use a different email address.",
-        };
+    // Handle known Prisma errors
+    if (error instanceof Error) {
+      if (error.name === "PrismaClientInitializationError") {
+        return { error: "Database connection error. Please try again later." };
       }
-      // Database connection errors
-      if (error.code === "P1001" || error.code === "P1017") {
-        console.error("Database connection error:", error);
-        return {
-          error:
-            "We're having trouble connecting to our database. Please try again in a few minutes.",
-        };
+      if (
+        error.name === "PrismaClientKnownRequestError" &&
+        "code" in error &&
+        error.code === "P2002"
+      ) {
+        return { error: "This email is already registered in our waitlist." };
       }
     }
 
