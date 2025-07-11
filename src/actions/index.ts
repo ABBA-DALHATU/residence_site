@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prismaClient";
-import { Prisma } from "@/generated/prisma";
+// import { Prisma } from "@/generated/prisma";
 
 export async function addToWaitlist(data: any) {
   try {
@@ -30,16 +30,9 @@ export async function addToWaitlist(data: any) {
         message: data.message,
       },
     });
-    console.log("Successfully created waitlist entry:", waitlist.id);
     return { success: "Added to waitlist", waitlist };
-  } catch (error: any) {
-    console.error("Detailed error object:", {
-      name: error?.name || "Unknown",
-      message: error?.message || "No message",
-      code: (error as any)?.code,
-      meta: (error as any)?.meta,
-      stack: error?.stack || "No stack trace",
-    });
+  } catch (error) {
+    console.error("Detailed error:", error);
 
     // Check if error is a Prisma error object
     if (error instanceof Object && "code" in error) {
@@ -51,7 +44,7 @@ export async function addToWaitlist(data: any) {
       }
       // Database connection errors
       if (error.code === "P1001" || error.code === "P1017") {
-        console.error("Database connection error details:", error);
+        console.error("Database connection error:", error);
         return {
           error:
             "We're having trouble connecting to our database. Please try again in a few minutes.",
@@ -59,16 +52,6 @@ export async function addToWaitlist(data: any) {
       }
     }
 
-    return {
-      error:
-        "Failed to add to waitlist. Please check your connection and try again.",
-    };
-  } finally {
-    // Always disconnect after operations
-    try {
-      await prisma.$disconnect();
-    } catch (e) {
-      console.error("Error disconnecting from database:", e);
-    }
+    return { error: "Failed to add to waitlist. Please try again later." };
   }
 }
