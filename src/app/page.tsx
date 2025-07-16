@@ -199,7 +199,7 @@ export default function ResidenceLanding() {
                 Simple steps to find your next home or list your property
               </p>
             </motion.div>
-            <div className="pl-4 flex flex-col md:flex-row md:gap-64 justify-between items-center">
+            <div className="pl-4 flex flex-col md:flex-row md:gap-64 justify-between items-start">
               <div className="flex flex-col justify-start">
                 <p className="text-lg text-center font-[600] mb-2">For Landlords</p>
                 <Button
@@ -222,7 +222,7 @@ export default function ResidenceLanding() {
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     viewport={{ once: true }}
-    className="grid md:grid-cols-2 gap-8"
+    className="grid md:grid-cols-2 gap-8 items-start"
   >
     {/* Landlord Image */}
     <motion.div
@@ -353,7 +353,7 @@ export default function ResidenceLanding() {
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     viewport={{ once: true }}
-    className="grid md:grid-cols-2 gap-8"
+    className="grid md:grid-cols-2 gap-8 items-start"
   >
     {/* Tenant Feature Cards */}
     <motion.div
