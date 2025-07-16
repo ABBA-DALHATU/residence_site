@@ -200,8 +200,8 @@ export default function ResidenceLanding() {
               </p>
             </motion.div>
             <div className="pl-4 flex flex-col md:flex-row md:gap-64 justify-between items-start">
-              <div className="flex flex-col justify-start">
-                <p className="text-lg text-center font-[600] mb-2">For Landlords</p>
+              <div className="flex flex-col items-start justify-start">
+                <p className="text-lg font-[600] mb-2">For Landlords</p>
                 <Button
                   variant="ghost"
                   className="w-52 mb-8 rounded-full text-[#0F7173]  bg-transparent border-2 border-[#0F7173]"
@@ -331,8 +331,8 @@ export default function ResidenceLanding() {
 
 {/* For Tenants Section Header - Make it mobile responsive */}
 <div className="pl-4 flex flex-col md:flex-row gap-8 md:gap-64 justify-between items-start md:items-center mb-8">
-  <div className="flex flex-col justify-start">
-    <p className="text-lg font-[600] text-center mb-2">For Tenants</p>
+  <div className="flex flex-col items-start justify-start">
+    <p className="text-lg font-[600] mb-2">For Tenants</p>
     <Button
       variant="ghost"
       className="w-full md:w-52 mb-4 md:mb-8 rounded-full text-[#0F7173] bg-transparent border-2 border-[#0F7173]"
