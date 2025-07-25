@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prismaClient";
-import { Prisma, PrismaClient } from "@prisma/client";
 
 export async function addToWaitlist(data: any) {
   try {
@@ -13,6 +12,21 @@ export async function addToWaitlist(data: any) {
         city: data.city,
         phone: data.phone,
         message: data.message,
+        // New landlord fields
+        minPrice: data.minPrice ? Number(data.minPrice) : null,
+        maxPrice: data.maxPrice ? Number(data.maxPrice) : null,
+        paymentType: data.paymentType || null,
+        landlordPropertyType: data.landlordPropertyType || null,
+        bedrooms: data.bedrooms || null,
+        bathrooms: data.bathrooms || null,
+        toilets: data.toilets || null,
+        livingRooms: data.livingRooms || null,
+        stayDuration: data.stayDuration || null,
+        propertyCondition: data.propertyCondition || null,
+        furnishing: data.furnishing || null,
+        amenities: data.amenities ? data.amenities.join(',') : null,
+        houseRules: data.houseRules ? data.houseRules.join(',') : null,
+        availability: data.availability || null,
       },
     });
     return { success: "Added to waitlist", waitlist };
