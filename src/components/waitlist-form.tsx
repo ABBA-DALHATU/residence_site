@@ -20,35 +20,6 @@ import { addToWaitlist } from "@/actions";
 import { toast } from "sonner";
 import { useState } from "react";
 
-const landlordPropertyTypes = [
-  "Flat/Apartment", "Duplex", "Bungalow", "Self Contained", "Studio Apartment", "Hostel Room", "Boys Quarter (BQ)", "Shared Apartment", "Short Let", "Mini Flat", "Penthouse", "Mansion", "Co Living Space"
-];
-const paymentTypes = [
-  "Monthly", "Yearly", "Per Night", "Weekly", "Per Semester"
-];
-const stayDurations = [
-  "Short Let (Per Night)", "Weekly", "Monthly", "Quarterly", "Half Year", "Annually", "Long Term", "Student Term (Per Semester)"
-];
-const propertyConditions = [
-  "Brand New", "Renovated", "Fairly Used", "Old", "Needs Renovation", "Under Construction"
-];
-const furnishingOptions = [
-  "Fully Furnished", "Semi-Furnished", "Not Furnished"
-];
-const amenitiesOptions = [
-  "Wi-Fi", "Generator", "24/7 Light", "Prepaid Meter", "Borehole Water", "POP Ceiling", "Air Conditioning", "Kitchen Cabinets", "Gas Cooker Installed", "Fridge / Freezer", "Bed / Mattress", "Wardrobe", "Balcony", "Private Toilet", "Private Kitchen", "Shared Toilet", "Shared Kitchen", "Laundry Area", "DSTV / Cable Ready", "Security", "CCTV Cameras", "Cleaning Services", "Parking Space", "Swimming Pool", "Gym", "Elevator", "Intercom"
-];
-const houseRulesOptions = [
-  "No Smoking", "No Pets", "No Parties", "Female Only", "Male Only", "Mixed Gender Allowed", "Couples Allowed", "Visitors Allowed", "No Overnight Guests", "Alcohol Prohibited"
-];
-const availabilityOptions = [
-  "Available Now", "Available Next Week", "Available Next Month", "Pre-Book"
-];
-const bedroomsOptions = ["1", "2", "3", "4", "5 and Above"];
-const bathroomsOptions = ["1", "2", "3", "4+"];
-const toiletsOptions = ["1", "2", "3", "4+"];
-const livingRoomsOptions = ["None", "1", "2"];
-
 const formSchema = z.object({
   fullName: z.string().min(2, {
     message: "Full name must be at least 2 characters.",
@@ -67,118 +38,114 @@ const formSchema = z.object({
   }),
   message: z.string().optional(),
   // Landlord fields
-  minPrice: z.string().optional(),
-  maxPrice: z.string().optional(),
-  paymentType: z.string().optional(),
+  landlordState: z.string().optional(),
+  landlordLocality: z.string().optional(),
+  landlordLandmarks: z.array(z.string()).optional(),
+  landlordAddress: z.string().optional(),
+  landlordPaymentType: z.string().optional(),
+  landlordPriceRange: z.string().optional(),
   landlordPropertyType: z.string().optional(),
-  bedrooms: z.string().optional(),
-  bathrooms: z.string().optional(),
-  toilets: z.string().optional(),
-  livingRooms: z.string().optional(),
-  stayDuration: z.string().optional(),
-  propertyCondition: z.string().optional(),
-  furnishing: z.string().optional(),
-  amenities: z.array(z.string()).optional(),
-  houseRules: z.array(z.string()).optional(),
-  availability: z.string().optional(),
+  landlordBedrooms: z.string().optional(),
+  landlordBathrooms: z.string().optional(),
+  landlordToilets: z.string().optional(),
+  landlordLivingRooms: z.string().optional(),
+  landlordStayDuration: z.string().optional(),
+  landlordCondition: z.string().optional(),
+  landlordFurnishing: z.string().optional(),
+  landlordAmenities: z.array(z.string()).optional(),
+  landlordHouseRules: z.array(z.string()).optional(),
+  landlordAvailability: z.string().optional(),
 }).superRefine((data, ctx) => {
   if (data.role === "LANDLORD") {
-    if (!data.minPrice || isNaN(Number(data.minPrice)) || Number(data.minPrice) < 0) {
+    if (!data.landlordState || data.landlordState.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Minimum price is required and must be a number",
-        path: ["minPrice"],
+        message: "State is required",
+        path: ["landlordState"],
       });
     }
-    if (!data.maxPrice || isNaN(Number(data.maxPrice)) || Number(data.maxPrice) < Number(data.minPrice || 0)) {
+    if (!data.landlordLocality || data.landlordLocality.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Maximum price is required and must be a number greater than or equal to minimum price",
-        path: ["maxPrice"],
+        message: "Locality is required",
+        path: ["landlordLocality"],
       });
     }
-    if (!data.paymentType || !paymentTypes.includes(data.paymentType)) {
+    if (!data.landlordPaymentType || data.landlordPaymentType.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Payment type is required",
-        path: ["paymentType"],
+        path: ["landlordPaymentType"],
       });
     }
-    if (!data.landlordPropertyType || !landlordPropertyTypes.includes(data.landlordPropertyType)) {
+    if (!data.landlordPriceRange || data.landlordPriceRange.trim() === "") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Price range is required",
+        path: ["landlordPriceRange"],
+      });
+    }
+    if (!data.landlordPropertyType || data.landlordPropertyType.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Property type is required",
         path: ["landlordPropertyType"],
       });
     }
-    if (!data.bedrooms || !bedroomsOptions.includes(data.bedrooms)) {
+    if (!data.landlordBedrooms || data.landlordBedrooms.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Bedrooms is required",
-        path: ["bedrooms"],
+        message: "Number of bedrooms is required",
+        path: ["landlordBedrooms"],
       });
     }
-    if (!data.bathrooms || !bathroomsOptions.includes(data.bathrooms)) {
+    if (!data.landlordBathrooms || data.landlordBathrooms.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Bathrooms is required",
-        path: ["bathrooms"],
+        message: "Number of bathrooms is required",
+        path: ["landlordBathrooms"],
       });
     }
-    if (!data.toilets || !toiletsOptions.includes(data.toilets)) {
+    if (!data.landlordToilets || data.landlordToilets.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Toilets is required",
-        path: ["toilets"],
+        message: "Number of toilets is required",
+        path: ["landlordToilets"],
       });
     }
-    if (!data.livingRooms || !livingRoomsOptions.includes(data.livingRooms)) {
+    if (!data.landlordLivingRooms || data.landlordLivingRooms.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Living rooms is required",
-        path: ["livingRooms"],
+        message: "Number of living rooms is required",
+        path: ["landlordLivingRooms"],
       });
     }
-    if (!data.stayDuration || !stayDurations.includes(data.stayDuration)) {
+    if (!data.landlordStayDuration || data.landlordStayDuration.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Stay duration is required",
-        path: ["stayDuration"],
+        path: ["landlordStayDuration"],
       });
     }
-    if (!data.propertyCondition || !propertyConditions.includes(data.propertyCondition)) {
+    if (!data.landlordCondition || data.landlordCondition.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Property condition is required",
-        path: ["propertyCondition"],
+        path: ["landlordCondition"],
       });
     }
-    if (!data.furnishing || !furnishingOptions.includes(data.furnishing)) {
+    if (!data.landlordFurnishing || data.landlordFurnishing.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Furnishing is required",
-        path: ["furnishing"],
+        message: "Furnishing status is required",
+        path: ["landlordFurnishing"],
       });
     }
-    if (!data.amenities || !Array.isArray(data.amenities) || data.amenities.length === 0) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "At least one amenity is required",
-        path: ["amenities"],
-      });
-    }
-    if (!data.houseRules || !Array.isArray(data.houseRules) || data.houseRules.length === 0) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "At least one house rule is required",
-        path: ["houseRules"],
-      });
-    }
-    if (!data.availability || !availabilityOptions.includes(data.availability)) {
+    if (!data.landlordAvailability || data.landlordAvailability.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Availability is required",
-        path: ["availability"],
+        path: ["landlordAvailability"],
       });
     }
   }
@@ -197,20 +164,23 @@ export function WaitlistForm() {
       phone: "",
       city: "",
       message: "",
-      minPrice: "",
-      maxPrice: "",
-      paymentType: "",
+      landlordState: "",
+      landlordLocality: "",
+      landlordLandmarks: [],
+      landlordAddress: "",
+      landlordPaymentType: "",
+      landlordPriceRange: "",
       landlordPropertyType: "",
-      bedrooms: "",
-      bathrooms: "",
-      toilets: "",
-      livingRooms: "",
-      stayDuration: "",
-      propertyCondition: "",
-      furnishing: "",
-      amenities: [],
-      houseRules: [],
-      availability: "",
+      landlordBedrooms: "",
+      landlordBathrooms: "",
+      landlordToilets: "",
+      landlordLivingRooms: "",
+      landlordStayDuration: "",
+      landlordCondition: "",
+      landlordFurnishing: "",
+      landlordAmenities: [],
+      landlordHouseRules: [],
+      landlordAvailability: "",
     },
   });
 
@@ -372,64 +342,183 @@ export function WaitlistForm() {
 
         {/* Landlord-specific fields */}
         {form.watch("role") === "LANDLORD" && (
-          <div className="space-y-4 border border-gray-200 rounded-lg p-4 bg-gray-50">
-            {/* Minimum Price */}
+          <div className="space-y-6 border border-gray-200 rounded-lg p-6 bg-gray-50">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Property Details</h3>
+            
+            {/* Location */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="landlordState"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>State</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      >
+                        <option value="">Select state</option>
+                        <option value="Abia">Abia</option>
+                        <option value="Adamawa">Adamawa</option>
+                        <option value="Akwa Ibom">Akwa Ibom</option>
+                        <option value="Anambra">Anambra</option>
+                        <option value="Bauchi">Bauchi</option>
+                        <option value="Bayelsa">Bayelsa</option>
+                        <option value="Benue">Benue</option>
+                        <option value="Borno">Borno</option>
+                        <option value="Cross River">Cross River</option>
+                        <option value="Delta">Delta</option>
+                        <option value="Ebonyi">Ebonyi</option>
+                        <option value="Edo">Edo</option>
+                        <option value="Ekiti">Ekiti</option>
+                        <option value="Enugu">Enugu</option>
+                        <option value="FCT">FCT (Abuja)</option>
+                        <option value="Gombe">Gombe</option>
+                        <option value="Imo">Imo</option>
+                        <option value="Jigawa">Jigawa</option>
+                        <option value="Kaduna">Kaduna</option>
+                        <option value="Kano">Kano</option>
+                        <option value="Katsina">Katsina</option>
+                        <option value="Kebbi">Kebbi</option>
+                        <option value="Kogi">Kogi</option>
+                        <option value="Kwara">Kwara</option>
+                        <option value="Lagos">Lagos</option>
+                        <option value="Nasarawa">Nasarawa</option>
+                        <option value="Niger">Niger</option>
+                        <option value="Ogun">Ogun</option>
+                        <option value="Ondo">Ondo</option>
+                        <option value="Osun">Osun</option>
+                        <option value="Oyo">Oyo</option>
+                        <option value="Plateau">Plateau</option>
+                        <option value="Rivers">Rivers</option>
+                        <option value="Sokoto">Sokoto</option>
+                        <option value="Taraba">Taraba</option>
+                        <option value="Yobe">Yobe</option>
+                        <option value="Zamfara">Zamfara</option>
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="landlordLocality"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Locality/Neighborhood</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="e.g. Lekki, Ikeja, Gwarinpa"
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* Nearby Landmarks */}
             <FormField
               control={form.control}
-              name="minPrice"
+              name="landlordLandmarks"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Minimum Price (₦)</FormLabel>
+                  <FormLabel>Nearby Landmarks (Select all that apply)</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Minimum price"
-                      type="number"
-                      min="0"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* Maximum Price */}
-            <FormField
-              control={form.control}
-              name="maxPrice"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Maximum Price (₦)</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Maximum price"
-                      type="number"
-                      min="0"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* Payment Type */}
-            <FormField
-              control={form.control}
-              name="paymentType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Payment Type</FormLabel>
-                  <FormControl>
-                    <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
-                      <option value="">Select payment type</option>
-                      {paymentTypes.map((type) => (
-                        <option key={type} value={type}>{type}</option>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {["School/University", "Market", "Hospital", "Main Road", "Mosque", "Church", "Shopping Mall", "Bank", "Restaurant"].map((landmark) => (
+                        <div key={landmark} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={landmark}
+                            checked={field.value?.includes(landmark)}
+                            onCheckedChange={(checked) => {
+                              const current = field.value || [];
+                              if (checked) {
+                                field.onChange([...current, landmark]);
+                              } else {
+                                field.onChange(current.filter(item => item !== landmark));
+                              }
+                            }}
+                          />
+                          <label htmlFor={landmark} className="text-sm text-gray-700">{landmark}</label>
+                        </div>
                       ))}
-                    </select>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {/* Specific Address */}
+            <FormField
+              control={form.control}
+              name="landlordAddress"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Specific Address (Optional)</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Street address, building name, etc."
+                      className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Payment Type and Price Range */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="landlordPaymentType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Payment Type</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      >
+                        <option value="">Select payment type</option>
+                        <option value="Monthly">Monthly</option>
+                        <option value="Yearly">Yearly</option>
+                        <option value="Per Night">Per Night</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Per Semester">Per Semester</option>
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="landlordPriceRange"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Price Range</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="e.g. ₦500,000 - ₦1,000,000"
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
             {/* Property Type */}
             <FormField
               control={form.control}
@@ -438,85 +527,118 @@ export function WaitlistForm() {
                 <FormItem>
                   <FormLabel>Property Type</FormLabel>
                   <FormControl>
-                    <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
+                    <select
+                      {...field}
+                      className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                    >
                       <option value="">Select property type</option>
-                      {landlordPropertyTypes.map((type) => (
-                        <option key={type} value={type}>{type}</option>
-                      ))}
+                      <option value="Flat/Apartment">Flat/Apartment</option>
+                      <option value="Duplex">Duplex</option>
+                      <option value="Bungalow">Bungalow</option>
+                      <option value="Self-Contained">Self-Contained</option>
+                      <option value="Studio Apartment">Studio Apartment</option>
+                      <option value="Hostel Room">Hostel Room</option>
+                      <option value="Boys Quarter (BQ)">Boys Quarter (BQ)</option>
+                      <option value="Shared Apartment">Shared Apartment</option>
+                      <option value="Short Let">Short Let</option>
+                      <option value="Mini Flat">Mini Flat</option>
+                      <option value="Penthouse">Penthouse</option>
+                      <option value="Mansion">Mansion</option>
+                      <option value="Co-Living Space">Co-Living Space</option>
                     </select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             {/* Number of Rooms */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <FormField
                 control={form.control}
-                name="bedrooms"
+                name="landlordBedrooms"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Bedrooms</FormLabel>
                     <FormControl>
-                      <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
-                        <option value="">Select bedrooms</option>
-                        {bedroomsOptions.map((opt) => (
-                          <option key={opt} value={opt}>{opt}</option>
-                        ))}
+                      <select
+                        {...field}
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      >
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5+">5 and Above</option>
                       </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
               <FormField
                 control={form.control}
-                name="bathrooms"
+                name="landlordBathrooms"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Bathrooms</FormLabel>
                     <FormControl>
-                      <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
-                        <option value="">Select bathrooms</option>
-                        {bathroomsOptions.map((opt) => (
-                          <option key={opt} value={opt}>{opt}</option>
-                        ))}
+                      <select
+                        {...field}
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      >
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4+">4+</option>
                       </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
               <FormField
                 control={form.control}
-                name="toilets"
+                name="landlordToilets"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Toilets</FormLabel>
                     <FormControl>
-                      <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
-                        <option value="">Select toilets</option>
-                        {toiletsOptions.map((opt) => (
-                          <option key={opt} value={opt}>{opt}</option>
-                        ))}
+                      <select
+                        {...field}
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      >
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4+">4+</option>
                       </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
               <FormField
                 control={form.control}
-                name="livingRooms"
+                name="landlordLivingRooms"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Living Rooms</FormLabel>
                     <FormControl>
-                      <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
-                        <option value="">Select living rooms</option>
-                        {livingRoomsOptions.map((opt) => (
-                          <option key={opt} value={opt}>{opt}</option>
-                        ))}
+                      <select
+                        {...field}
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      >
+                        <option value="">Select</option>
+                        <option value="None">None</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                       </select>
                     </FormControl>
                     <FormMessage />
@@ -524,88 +646,117 @@ export function WaitlistForm() {
                 )}
               />
             </div>
+
             {/* Stay Duration */}
             <FormField
               control={form.control}
-              name="stayDuration"
+              name="landlordStayDuration"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Stay Duration</FormLabel>
                   <FormControl>
-                    <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
+                    <select
+                      {...field}
+                      className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                    >
                       <option value="">Select stay duration</option>
-                      {stayDurations.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                      ))}
+                      <option value="Short Let (Per Night)">Short Let (Per Night)</option>
+                      <option value="Weekly">Weekly</option>
+                      <option value="Monthly">Monthly</option>
+                      <option value="Quarterly">Quarterly</option>
+                      <option value="Half Year">Half Year</option>
+                      <option value="Annually">Annually</option>
+                      <option value="Long-Term">Long-Term</option>
+                      <option value="Student Term (Per Semester)">Student Term (Per Semester)</option>
                     </select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/* Property Condition */}
+
+            {/* Property Condition and Furnishing */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="landlordCondition"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Property Condition</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      >
+                        <option value="">Select condition</option>
+                        <option value="Brand New">Brand New</option>
+                        <option value="Renovated">Renovated</option>
+                        <option value="Fairly Used">Fairly Used</option>
+                        <option value="Old">Old</option>
+                        <option value="Needs Renovation">Needs Renovation</option>
+                        <option value="Under Construction">Under Construction</option>
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="landlordFurnishing"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Furnishing</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                      >
+                        <option value="">Select furnishing</option>
+                        <option value="Fully Furnished">Fully Furnished</option>
+                        <option value="Semi-Furnished">Semi-Furnished</option>
+                        <option value="Not Furnished">Not Furnished</option>
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* Amenities */}
             <FormField
               control={form.control}
-              name="propertyCondition"
+              name="landlordAmenities"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Property Condition</FormLabel>
+                  <FormLabel>Amenities/Features (Select all that apply)</FormLabel>
                   <FormControl>
-                    <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
-                      <option value="">Select property condition</option>
-                      {propertyConditions.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                      ))}
-                    </select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* Furnishing */}
-            <FormField
-              control={form.control}
-              name="furnishing"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Furnishing</FormLabel>
-                  <FormControl>
-                    <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
-                      <option value="">Select furnishing</option>
-                      {furnishingOptions.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                      ))}
-                    </select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* Amenities / Features */}
-            <FormField
-              control={form.control}
-              name="amenities"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Amenities / Features</FormLabel>
-                  <FormControl>
-                    <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto border rounded p-2 bg-white">
-                      {amenitiesOptions.map((opt) => (
-                        <label key={opt} className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            value={opt}
-                            checked={field.value?.includes(opt) || false}
-                            onChange={e => {
-                              if (e.target.checked) {
-                                field.onChange([...(field.value || []), opt]);
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {[
+                        "Wi-Fi", "Generator", "24/7 Light", "Prepaid Meter", "Borehole Water", "POP Ceiling", 
+                        "Air Conditioning", "Kitchen Cabinets", "Gas Cooker Installed", "Fridge/Freezer", 
+                        "Bed/Mattress", "Wardrobe", "Balcony", "Private Toilet", "Private Kitchen", 
+                        "Shared Toilet", "Shared Kitchen", "Laundry Area", "DSTV/Cable Ready", "Security", 
+                        "CCTV Cameras", "Cleaning Services", "Parking Space", "Swimming Pool", "Gym", 
+                        "Elevator", "Intercom"
+                      ].map((amenity) => (
+                        <div key={amenity} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={amenity}
+                            checked={field.value?.includes(amenity)}
+                            onCheckedChange={(checked) => {
+                              const current = field.value || [];
+                              if (checked) {
+                                field.onChange([...current, amenity]);
                               } else {
-                                field.onChange((field.value || []).filter((v: string) => v !== opt));
+                                field.onChange(current.filter(item => item !== amenity));
                               }
                             }}
                           />
-                          <span>{opt}</span>
-                        </label>
+                          <label htmlFor={amenity} className="text-sm text-gray-700">{amenity}</label>
+                        </div>
                       ))}
                     </div>
                   </FormControl>
@@ -613,31 +764,36 @@ export function WaitlistForm() {
                 </FormItem>
               )}
             />
-            {/* House Rules / Restrictions */}
+
+            {/* House Rules */}
             <FormField
               control={form.control}
-              name="houseRules"
+              name="landlordHouseRules"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>House Rules / Restrictions</FormLabel>
+                  <FormLabel>House Rules/Restrictions (Select all that apply)</FormLabel>
                   <FormControl>
-                    <div className="grid grid-cols-2 gap-2 max-h-32 overflow-y-auto border rounded p-2 bg-white">
-                      {houseRulesOptions.map((opt) => (
-                        <label key={opt} className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            value={opt}
-                            checked={field.value?.includes(opt) || false}
-                            onChange={e => {
-                              if (e.target.checked) {
-                                field.onChange([...(field.value || []), opt]);
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {[
+                        "No Smoking", "No Pets", "No Parties", "Female Only", "Male Only", 
+                        "Mixed Gender Allowed", "Couples Allowed", "Visitors Allowed", 
+                        "No Overnight Guests", "Alcohol Prohibited"
+                      ].map((rule) => (
+                        <div key={rule} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={rule}
+                            checked={field.value?.includes(rule)}
+                            onCheckedChange={(checked) => {
+                              const current = field.value || [];
+                              if (checked) {
+                                field.onChange([...current, rule]);
                               } else {
-                                field.onChange((field.value || []).filter((v: string) => v !== opt));
+                                field.onChange(current.filter(item => item !== rule));
                               }
                             }}
                           />
-                          <span>{opt}</span>
-                        </label>
+                          <label htmlFor={rule} className="text-sm text-gray-700">{rule}</label>
+                        </div>
                       ))}
                     </div>
                   </FormControl>
@@ -645,19 +801,24 @@ export function WaitlistForm() {
                 </FormItem>
               )}
             />
+
             {/* Availability */}
             <FormField
               control={form.control}
-              name="availability"
+              name="landlordAvailability"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Availability</FormLabel>
                   <FormControl>
-                    <select {...field} className="w-full px-4 py-3 rounded-full border border-gray-300">
+                    <select
+                      {...field}
+                      className="w-full px-4 py-3 rounded-full border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none text-gray-900 text-base"
+                    >
                       <option value="">Select availability</option>
-                      {availabilityOptions.map((opt) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                      ))}
+                      <option value="Available Now">Available Now</option>
+                      <option value="Available Next Week">Available Next Week</option>
+                      <option value="Available Next Month">Available Next Month</option>
+                      <option value="Pre-Book">Pre-Book</option>
                     </select>
                   </FormControl>
                   <FormMessage />
